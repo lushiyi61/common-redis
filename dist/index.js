@@ -7,8 +7,8 @@ var logger = common_log4js_1.default.getLogger(path_1.basename(__filename));
 ///////////////////////////////////////////////////////
 var redis_1 = require("redis");
 var client;
-function createRedisClient() {
-    client = redis_1.createClient();
+function createRedisClient(options) {
+    client = redis_1.createClient(options);
 }
 exports.createRedisClient = createRedisClient;
 ;

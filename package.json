@@ -1,6 +1,6 @@
 {
   "name": "common-redis",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "ts 封装的redis",
   "main": "dist/index.js",
   "scripts": {

@@ -1,4 +1,5 @@
-export declare function createRedisClient(): void;
+import { ClientOpts } from "redis";
+export declare function createRedisClient(options?: ClientOpts): void;
 /**
  * 同步获取redis中的值
  * @param {*} key

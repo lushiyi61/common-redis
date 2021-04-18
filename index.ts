@@ -2,12 +2,12 @@ import log4js from "common-log4js";
 import { basename } from "path";
 const logger = log4js.getLogger(basename(__filename));
 ///////////////////////////////////////////////////////
-import { createClient, RedisClient } from "redis";
+import { ClientOpts, createClient, RedisClient } from "redis";
 
 let client: RedisClient;
 
-export function createRedisClient() {
-    client = createClient();
+export function createRedisClient(options?: ClientOpts) {
+    client = createClient(options);
 };
 
 /**
