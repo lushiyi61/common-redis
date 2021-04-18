@@ -1,0 +1,18 @@
+{
+  "name": "common-redis",
+  "version": "1.0.0",
+  "description": "ts 封装的redis",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/node": "^14.14.41",
+    "@types/redis": "^2.8.28",
+    "common-log4js": "^1.0.4",
+    "redis": "^3.1.1",
+    "typescript": "^4.2.4"
+  }
+}
