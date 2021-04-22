@@ -87,3 +87,19 @@ export function set_value_expire_async(key: string, value: string, time: number)
         });
     });
 }
+
+/**
+ * 删除
+ * @param key 
+ * @returns 
+ */
+export function del_value_async(key: string): Promise<null> {
+    return new Promise((resolve, reject) => {
+        client.del(key, (err, rsp) => {
+            if (err) {
+                logger.error("REDIS DEL VALUE FAILED:", err);
+                resolve(null);
+            }
+        });
+    });
+}

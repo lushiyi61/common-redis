@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.set_value_expire_async = exports.expire_async = exports.set_value_async = exports.get_value_async = exports.createRedisClient = void 0;
+exports.del_value_async = exports.set_value_expire_async = exports.expire_async = exports.set_value_async = exports.get_value_async = exports.createRedisClient = void 0;
 var common_log4js_1 = require("common-log4js");
 var path_1 = require("path");
 var logger = common_log4js_1.default.getLogger(path_1.basename(__filename));
@@ -87,3 +87,19 @@ function set_value_expire_async(key, value, time) {
     });
 }
 exports.set_value_expire_async = set_value_expire_async;
+/**
+ * 删除
+ * @param key
+ * @returns
+ */
+function del_value_async(key) {
+    return new Promise(function (resolve, reject) {
+        client.del(key, function (err, rsp) {
+            if (err) {
+                logger.error("REDIS DEL VALUE FAILED:", err);
+                resolve(null);
+            }
+        });
+    });
+}
+exports.del_value_async = del_value_async;

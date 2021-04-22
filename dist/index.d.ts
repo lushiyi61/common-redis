@@ -25,3 +25,9 @@ export declare function expire_async(key: string, time: number): Promise<number 
  * @param {*} time
  */
 export declare function set_value_expire_async(key: string, value: string, time: number): Promise<number | null>;
+/**
+ * 删除
+ * @param key
+ * @returns
+ */
+export declare function del_value_async(key: string): Promise<null>;
