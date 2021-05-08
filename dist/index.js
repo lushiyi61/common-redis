@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.del_value_async = exports.set_value_expire_async = exports.expire_async = exports.set_value_async = exports.get_value_async = exports.createRedisClient = void 0;
+exports.del_value_async = exports.set_value_expire_async = exports.expire_async = exports.hset_value_async = exports.set_value_async = exports.hget_value_async = exports.get_value_async = exports.createRedisClient = void 0;
 var common_log4js_1 = require("common-log4js");
 var path_1 = require("path");
 var logger = common_log4js_1.default.getLogger(path_1.basename(__filename));
@@ -30,6 +30,24 @@ function get_value_async(key, default_value) {
 }
 exports.get_value_async = get_value_async;
 /**
+ * 同步获取redis中的值
+ * @param {*} key
+ * @param {*} field
+ * @param {*} default_value
+ */
+function hget_value_async(key, field, default_value) {
+    return new Promise(function (resolve, reject) {
+        client.hget(key, field, function (err, rsp) {
+            if (err) {
+                logger.error("REDIS ASYNC HGET KEY ERROR:", err);
+                resolve(default_value);
+            }
+            resolve(rsp);
+        });
+    });
+}
+exports.hget_value_async = hget_value_async;
+/**
  * 同步设置值
  * @param {*} key
  * @param {*} value
@@ -46,6 +64,23 @@ function set_value_async(key, value) {
     });
 }
 exports.set_value_async = set_value_async;
+/**
+ * 同步设置值
+ * @param {*} key
+ * @param {*} value
+ */
+function hset_value_async(key, field, value) {
+    return new Promise(function (resolve, reject) {
+        client.hset(key, field, value, function (err, rsp) {
+            if (err) {
+                logger.error("REDIS SET VALUE FAILED:", err);
+                resolve(null);
+            }
+            resolve(rsp);
+        });
+    });
+}
+exports.hset_value_async = hset_value_async;
 /**
  * 同步设置记录生命周期
  * @param {*} key
