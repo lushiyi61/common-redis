@@ -43,4 +43,4 @@ export declare function set_value_expire_async(key: string, value: string, time:
  * @param key
  * @returns
  */
-export declare function del_value_async(key: string): Promise<null>;
+export declare function del_value_async(key: string): Promise<null | number>;

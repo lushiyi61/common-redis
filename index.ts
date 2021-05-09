@@ -15,7 +15,7 @@ export function createRedisClient(options?: ClientOpts) {
  * @param {*} key 
  * @param {*} default_value 
  */
-export function get_value_async(key: string, default_value: string): Promise<string | null> {
+export async function get_value_async(key: string, default_value: string): Promise<string | null> {
     return new Promise((resolve, reject) => {
         client.get(key, (err, rsp) => {
             if (err) {
@@ -33,7 +33,7 @@ export function get_value_async(key: string, default_value: string): Promise<str
  * @param {*} field
  * @param {*} default_value 
  */
-export function hget_value_async(key: string, field: string, default_value: string): Promise<string | null> {
+export async function hget_value_async(key: string, field: string, default_value: string): Promise<string | null> {
     return new Promise((resolve, reject) => {
         client.hget(key, field, (err, rsp) => {
             if (err) {
@@ -51,7 +51,7 @@ export function hget_value_async(key: string, field: string, default_value: stri
  * @param {*} key
  * @param {*} value 
  */
-export function set_value_async(key: string, value: string): Promise<string | null> {
+export async function set_value_async(key: string, value: string): Promise<string | null> {
     return new Promise((resolve, reject) => {
         client.set(key, value, (err, rsp) => {
             if (err) {
@@ -68,7 +68,7 @@ export function set_value_async(key: string, value: string): Promise<string | nu
  * @param {*} key
  * @param {*} value 
  */
-export function hset_value_async(key: string, field: string, value: string): Promise<number | null> {
+export async function hset_value_async(key: string, field: string, value: string): Promise<number | null> {
     return new Promise((resolve, reject) => {
         client.hset(key, field, value, (err, rsp) => {
             if (err) {
@@ -86,7 +86,7 @@ export function hset_value_async(key: string, field: string, value: string): Pro
  * @param {*} key 
  * @param {*} time 
  */
-export function expire_async(key: string, time: number): Promise<number | null> {
+export async function expire_async(key: string, time: number): Promise<number | null> {
     return new Promise((resolve, reject) => {
         client.expire(key, time, (err, rsp) => {
             if (err) {
@@ -105,7 +105,7 @@ export function expire_async(key: string, time: number): Promise<number | null> 
  * @param {*} value 
  * @param {*} time 
  */
-export function set_value_expire_async(key: string, value: string, time: number): Promise<number | null> {
+export async function set_value_expire_async(key: string, value: string, time: number): Promise<number | null> {
     return new Promise((resolve, reject) => {
         client.set(key, value, (err, rsp) => {
             if (err) {
@@ -128,13 +128,14 @@ export function set_value_expire_async(key: string, value: string, time: number)
  * @param key 
  * @returns 
  */
-export function del_value_async(key: string): Promise<null> {
+export async function del_value_async(key: string): Promise<null | number> {
     return new Promise((resolve, reject) => {
         client.del(key, (err, rsp) => {
             if (err) {
                 logger.error("REDIS DEL VALUE FAILED:", err);
                 resolve(null);
             }
+            resolve(rsp);
         });
     });
 }
